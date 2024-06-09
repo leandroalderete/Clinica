@@ -32,17 +32,12 @@ export class RegistroComponent {
     if (this.usuario.contra != this.confirmacontra || this.usuario.email != this.confirmaemail) {
       console.error("Por favor verifique los datos ingresados");
     }
-      this.registraAfiliado() // llamo aca 
+    this.consultaBackApi.registrar(this.usuario).subscribe()// llamo a lo que ya esta
     
     
   }
   constructor(private consultaBackApi: ConsultasBackServiceService) {  // INSTANCIO MI CLASE DE BACK PARA TODOS LOS OOPERADORES
 
-  }// funcion para registrado afilia
-  registraAfiliado(){
-
-    this.consultaBackApi.registrar(this.usuario).subscribe()// llamo a lo que ya esta 
-
-
   }
+ 
 }

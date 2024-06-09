@@ -8,7 +8,7 @@ import { loginUser } from '../entidades/loginUser';
 })
 export class ConsultasBackServiceService {
 
-  private APIURL: string = "https://leandro_alderete-clinica.mdbgo.io";
+  private APIURL: string = "http://localhost:3000";
 
 
   constructor(public http: HttpClient) { }
@@ -18,6 +18,7 @@ export class ConsultasBackServiceService {
     return this.http.post(this.APIURL + "/insertar", usuario);
   }
   public login(loginUsuario:loginUser){
+    console.log(this.APIURL+"/loguear")
     return this.http.post(this.APIURL + "/loguear", loginUsuario);
     
   }

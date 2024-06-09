@@ -1,12 +1,16 @@
 <div class="form-container">
     <h2>Completá tus datos</h2>
-    <form action="#" method="POST">
+    <form action="#" method="POST" >
         <input type="text" name="nombre" [(ngModel)]="usuario.nombre" placeholder="Nombre" required #nombre = "ngModel">
         <div  class="alert alert-danger"[hidden]="nombre.valid || nombre.pristine">
-            El nombre es obligatorio
+            El campo Nombre es obligatorio
 
         </div>
-        <input type="text" name="nombre" [(ngModel)]="usuario.apellido" placeholder="Apellido" required>
+        <input type="text" name="apellido" [(ngModel)]="usuario.apellido" placeholder="Apellido" required #apellido="ngModel">
+        <div  class="alert alert-danger"[hidden]="apellido.valid || apellido.pristine">
+            El campo Apellido es obligatorio
+
+        </div>
         <input type="text" name="dni" [(ngModel)]="usuario.dni" placeholder="DNI" required>
         <input type="tel" name="telefono" [(ngModel)]="usuario.telefono" placeholder="Teléfono" required>
         <input type="password" name="contrasena" [(ngModel)]="usuario.contra" placeholder="Contraseña" required>
@@ -32,7 +36,9 @@
 
         <input *ngIf="usuario.tipoUsuario == 'Afiliado'" type="text" name="Credencial" [(ngModel)]="usuario.credencial" placeholder="Credencial">
 
-        <input type="submit" value="REGISTRATE" (click)="registraUsuario()">
+        <input type="submit" value="REGISTRATE" [disabled]="true"  (click)="registraUsuario()">
+
+        
 
 
     </form>

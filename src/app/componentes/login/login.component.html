@@ -7,10 +7,10 @@
         <label for="password">Contraseña</label>
         <input type="password" name="password" [(ngModel)]="loginUsuario.contra "placeholder="Ingresa tu contraseña" required>
         
-        <button type="submit">INGRESA</button>
+        <button type="submit" (click)="login()">INGRESA </button>
         
         <div class="links">
-            <a >¿Olvidaste tu contraseña?</a>
+            <a >¿Olvidaste tu contraseña? </a>
             <a routerLink='/registro' >¿No tienes cuenta? Registrate</a>
         </div>
     </form>
