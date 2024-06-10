@@ -11,9 +11,24 @@
             El campo Apellido es obligatorio
 
         </div>
-        <input type="text" name="dni" [(ngModel)]="usuario.dni" placeholder="DNI" required>
-        <input type="tel" name="telefono" [(ngModel)]="usuario.telefono" placeholder="Teléfono" required>
-        <input type="password" name="contrasena" [(ngModel)]="usuario.contra" placeholder="Contraseña" required>
+        <input type="text" name="dni" [(ngModel)]="usuario.dni" placeholder="DNI" required #dni ="ngModel">
+
+        <div  class="alert alert-danger"[hidden]="dni.valid || dni.pristine">
+            El campo DNI es obligatorio
+
+        </div>
+        <input type="tel" name="telefono" [(ngModel)]="usuario.telefono" placeholder="Teléfono" required #telefono  ="ngModel">
+
+        <div  class="alert alert-danger"[hidden]="telefono.valid || telefono.pristine">
+            El campo telefono es obligatorio
+
+        </div>
+        <input type="password" name="contrasena" [(ngModel)]="usuario.contra" placeholder="Contraseña" required #contrasena="ngModel">
+
+        <div  class="alert alert-danger"[hidden]="contrasena.valid || contrasena.pristine">
+            El campo contraseña es obligatorio
+
+        </div>
         <input type="password" name="confirmar_contrasena" [(ngModel)]="confirmacontra"
             placeholder="Confirmar Contraseña" required>
         <input type="email" name="email" [(ngModel)]="usuario.email" placeholder="E-mail" required>
@@ -36,7 +51,7 @@
 
         <input *ngIf="usuario.tipoUsuario == 'Afiliado'" type="text" name="Credencial" [(ngModel)]="usuario.credencial" placeholder="Credencial">
 
-        <input type="submit" value="REGISTRATE" [disabled]="true"  (click)="registraUsuario()">
+        <input type="submit" value="REGISTRATE"  (click)="registraUsuario()">
 
         
 

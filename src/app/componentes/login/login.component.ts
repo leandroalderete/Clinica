@@ -30,7 +30,7 @@ export class LoginComponent {
     this.consultaBackApi.login(this.loginUsuario).subscribe(
       consultausuario =>{
         if((<dataToken>consultausuario).data[0].dni == null ) {
-          console.error ("Usuario inexistente")
+          console.error ("Usuario inexistente");
 
         }else{ 
           this.root.navigateByUrl("/")
