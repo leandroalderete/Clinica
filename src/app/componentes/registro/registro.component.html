@@ -1,34 +1,21 @@
 <div class="form-container">
-    <h2>Completá tus datos</h2>
+    
     <form action="#" method="POST" >
-        <input type="text" name="nombre" [(ngModel)]="usuario.nombre" placeholder="Nombre" required #nombre = "ngModel">
-        <div  class="alert alert-danger"[hidden]="nombre.valid || nombre.pristine">
-            El campo Nombre es obligatorio
 
-        </div>
-        <input type="text" name="apellido" [(ngModel)]="usuario.apellido" placeholder="Apellido" required #apellido="ngModel">
-        <div  class="alert alert-danger"[hidden]="apellido.valid || apellido.pristine">
-            El campo Apellido es obligatorio
+        <h2>Completá tus datos</h2>
+        <input type="text" name="nombre" [(ngModel)]="usuario.nombre" placeholder="Nombre" required >
+       
+        <input type="text" name="apellido" [(ngModel)]="usuario.apellido" placeholder="Apellido" required >
+        
+        <input type="text" name="dni" [(ngModel)]="usuario.dni" placeholder="DNI" required>
 
-        </div>
-        <input type="text" name="dni" [(ngModel)]="usuario.dni" placeholder="DNI" required #dni ="ngModel">
+        
+        <input type="tel" name="telefono" [(ngModel)]="usuario.telefono" placeholder="Teléfono" required >
 
-        <div  class="alert alert-danger"[hidden]="dni.valid || dni.pristine">
-            El campo DNI es obligatorio
+       
+        <input type="password" name="contrasena" [(ngModel)]="usuario.contra" placeholder="Contraseña"  required>
 
-        </div>
-        <input type="tel" name="telefono" [(ngModel)]="usuario.telefono" placeholder="Teléfono" required #telefono  ="ngModel">
-
-        <div  class="alert alert-danger"[hidden]="telefono.valid || telefono.pristine">
-            El campo telefono es obligatorio
-
-        </div>
-        <input type="password" name="contrasena" [(ngModel)]="usuario.contra" placeholder="Contraseña" required #contrasena="ngModel">
-
-        <div  class="alert alert-danger"[hidden]="contrasena.valid || contrasena.pristine">
-            El campo contraseña es obligatorio
-
-        </div>
+       
         <input type="password" name="confirmar_contrasena" [(ngModel)]="confirmacontra"
             placeholder="Confirmar Contraseña" required>
         <input type="email" name="email" [(ngModel)]="usuario.email" placeholder="E-mail" required>
@@ -53,11 +40,14 @@
 
         <input type="submit" value="REGISTRATE"  (click)="registraUsuario()">
 
+
+        
         
 
 
     </form>
+
+
+    
 </div>
-<div class="image-container">
-    <img src="../../../assets/HomeSalud.jpeg">
-</div>
+

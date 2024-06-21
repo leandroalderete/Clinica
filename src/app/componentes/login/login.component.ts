@@ -20,20 +20,32 @@ export class LoginComponent {
   public loginUsuario: loginUser = {
     dni: '',
     contra: '',
-  }
+    tipoUsuario:'',
 
+  }
+  //public usuarioEjemplo: loginUser[] = [     {        dni: '',         contra: "" } ];
   constructor(private consultaBackApi: ConsultasBackServiceService ,private root:Router) {  // INSTANCIO MI CLASE DE BACK PARA TODOS LOS OOPERADORES
 
   }
 
   login(){
     this.consultaBackApi.login(this.loginUsuario).subscribe(
-      consultausuario =>{
-        if((<dataToken>consultausuario).data[0].dni == null ) {
+      (consultausuario :loginUser[]) =>{
+        if(consultausuario[0].dni == null ) {
           console.error ("Usuario inexistente");
 
-        }else{ 
-          this.root.navigateByUrl("/")
+        }else { 
+          switch(this.loginUsuario.tipoUsuario){
+            case "Afiliado":
+              this.root.navigateByUrl("/afiliado");
+              break;
+            case "medico":
+              this.root.navigateByUrl("/medico");
+              break;
+            case "admin":
+              this.root.navigateByUrl("/admin");
+              break;
+          }
           
         } // casteo la consultausuario al objeto logiUser 
         

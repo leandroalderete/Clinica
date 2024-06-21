@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../entidades/Usuario';
 import { loginUser } from '../entidades/loginUser';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,13 @@ export class ConsultasBackServiceService {
   public registrar(usuario:Usuario) {
     return this.http.post(this.APIURL + "/insertar", usuario);
   }
-  public login(loginUsuario:loginUser){
+
+  public registrarMedic(usuario:Usuario) {
+    return this.http.post(this.APIURL + "/insertarMedic", usuario);
+  }
+  public login(loginUsuario:loginUser):Observable<loginUser[]>{
     console.log(this.APIURL+"/loguear")
-    return this.http.post(this.APIURL + "/loguear", loginUsuario);
+    return this.http.post<loginUser[]>(this.APIURL + "/loguear", loginUsuario);
     
   }
 
