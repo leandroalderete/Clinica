@@ -3,18 +3,98 @@
         <div class="logo">
             <img src="logo.png" alt="prueba">
         </div>
-        
-       
     </header>
-    
+
     <main>
         <h1>¡Bienvenido Medico ! ¿Qué necesitás hoy?</h1>
         <div class="main-buttons">
-            <button>Nuevo Turno</button>
+            <button (click)="toggleDisponibilidadForm()">Disponibilidad</button>
             <button>Historial</button>
-            <button>Mis turnos </button>
-            
+            <button (click)="toggleTurnosList()">Turnos Pacientes</button> <!-- Cambiar función -->
         </div>
-        
+
+        <!-- Formulario de disponibilidad -->
+        <form *ngIf="showDisponibilidadForm" (ngSubmit)="enviarDisponibilidad()">
+            <label for="horadesde">Hora Desde:</label>
+            <input type="time" id="horadesde" [(ngModel)]="disponibilidad.horaDesde" name="horaDesde" required>
+
+            <label for="horahasta">Hora Hasta:</label>
+            <input type="time" id="horahasta" [(ngModel)]="disponibilidad.horaHasta" name="horaHasta" required>
+
+            <label for="dias">Días:</label>
+            <select id="dias" multiple [(ngModel)]="disponibilidad.dias" name="dias" required>
+                <option value="LU">Lunes</option>
+                <option value="MA">Martes</option>
+                <option value="MI">Miércoles</option>
+                <option value="JU">Jueves</option>
+                <option value="VI">Viernes</option>
+            </select>
+
+            <button type="submit">Enviar Disponibilidad</button>
+        </form>
+
+        <!-- Lista de turnos -->
+        <div class="row" *ngIf="showTurnosList">
+            <h2 class="col-6">Lista de Turnos</h2>
+            <button (click)="generarCSV()">Exportar a CSV</button>
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>DNI</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Estado</th>
+                            <th>Confirmar</th>
+                            <th>Finalizar turno</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let turno of turnos">
+                            <td>{{ turno.Afiliado }}</td>
+                            <td>{{ turno.dni_paciente }}</td>
+                            <td>{{ turno.fechaturno }}</td>
+                            <td>{{ turno.hora }}</td>
+                            <td>{{ turno.estado }}</td>
+                            <td>
+                                <label class="switch">
+                                    <button (click)="openModal(turno)">Seleccionar</button>
+                                    <span class="slider"></span>
+                                </label>
+                            </td>
+                            <td><i class="fa fa-pencil" aria-hidden="true"></i></td>
+                        </tr>
+                    </tbody>
+                    
+                    <!-- Modal -->
+                    <div class="modal" *ngIf="isModalOpen">
+                        <div class="modal-content">
+                            <h2>Seleccione una opción</h2>
+                            
+                            <form (ngSubmit)="enviarOpciones()">
+                                <label>
+                                    <input type="radio" name="opcion" [(ngModel)]="opcionSeleccionada" value="Aceptado" required>
+                                    Aceptar
+                                </label>
+                                <label>
+                                    <input type="radio" name="opcion" [(ngModel)]="opcionSeleccionada" value="Rechazado">
+                                    Rechaza
+                                </label>
+                                <label>
+                                    <input type="radio" name="opcion" [(ngModel)]="opcionSeleccionada" value="Finalizado">
+                                    Finalizar
+                                </label>
+                                
+                                <div class="modal-buttons">
+                                    <button type="submit">Enviar</button>
+                                    <button type="button" (click)="closeModal()">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </table>
+            </div>
+        </div>
     </main>
 </div>

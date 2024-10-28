@@ -22,7 +22,11 @@ export class LoginComponent {
     contra: '',
     tipoUsuario:'',
 
+
+
+
   }
+  
   //public usuarioEjemplo: loginUser[] = [     {        dni: '',         contra: "" } ];
   constructor(private consultaBackApi: ConsultasBackServiceService ,private root:Router) {  // INSTANCIO MI CLASE DE BACK PARA TODOS LOS OOPERADORES
 
@@ -35,15 +39,19 @@ export class LoginComponent {
           console.error ("Usuario inexistente");
 
         }else { 
+          sessionStorage.setItem('USER_DATA', JSON.stringify(this.loginUsuario));
+          console.log ("login: " ,this.loginUsuario)
+
           switch(this.loginUsuario.tipoUsuario){
             case "Afiliado":
               this.root.navigateByUrl("/afiliado");
+
               break;
             case "medico":
               this.root.navigateByUrl("/medico");
               break;
             case "admin":
-              this.root.navigateByUrl("/admin");
+              this.root.navigateByUrl("/administrador");
               break;
           }
           
