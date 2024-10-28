@@ -1,6 +1,5 @@
-export interface Usuario {
+export interface Medicos{
 
-    tipoUsuario: String;
     email: String;
     dni: number | null;
     nombre: String;
@@ -13,4 +12,5 @@ export interface Usuario {
     habilitado: string;
 
 }
+
 

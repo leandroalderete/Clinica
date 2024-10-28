@@ -1,53 +1,70 @@
 <div class="form-container">
-    
-    <form action="#" method="POST" >
-
-        <h2>Completá tus datos</h2>
-        <input type="text" name="nombre" [(ngModel)]="usuario.nombre" placeholder="Nombre" required >
-       
-        <input type="text" name="apellido" [(ngModel)]="usuario.apellido" placeholder="Apellido" required >
-        
-        <input type="text" name="dni" [(ngModel)]="usuario.dni" placeholder="DNI" required>
-
-        
-        <input type="tel" name="telefono" [(ngModel)]="usuario.telefono" placeholder="Teléfono" required >
-
-       
-        <input type="password" name="contrasena" [(ngModel)]="usuario.contra" placeholder="Contraseña"  required>
-
-       
-        <input type="password" name="confirmar_contrasena" [(ngModel)]="confirmacontra"
-            placeholder="Confirmar Contraseña" required>
-        <input type="email" name="email" [(ngModel)]="usuario.email" placeholder="E-mail" required>
-        <input type="email" name="confirmar_email" [(ngModel)]="confirmaemail" placeholder="Confirmar E-mail" required>
-
-        <div class="radio-group">
-            <label>
-                <input type="radio" name="tipo_usuario" [(ngModel)]="usuario.tipoUsuario" value="medico" required> Médico
-
-            </label>
-            <label>
-                <input type="radio" name="tipo_usuario" [(ngModel)]="usuario.tipoUsuario" value="Afiliado" required> Paciente
-
-            </label>
-        </div>
-
-        <input *ngIf="usuario.tipoUsuario == 'medico'" type="text" name="Especialidad" [(ngModel)]="usuario.especialidad" placeholder="Especialidad">
-
-        <input *ngIf="usuario.tipoUsuario == 'medico'" type="text" name="Matricula" [(ngModel)]="usuario.matricula" placeholder="Matricula">
-
-        <input *ngIf="usuario.tipoUsuario == 'Afiliado'" type="text" name="Credencial" [(ngModel)]="usuario.credencial" placeholder="Credencial">
-
-        <input type="submit" value="REGISTRATE"  (click)="registraUsuario()">
-
-
-        
-        
-
-
+    <form [formGroup]="miForm" class="form-content" (ngSubmit)="registraUsuario()">
+      <h2>Completá tus datos</h2>
+  
+      <input formControlName="nombre" type="text" placeholder="Nombre" />
+      <div *ngIf="miForm.get('nombre')?.invalid && miForm.get('nombre')?.touched">
+        <small *ngIf="miForm.get('nombre')?.errors?.['required']">El nombre es obligatorio.</small>
+        <small *ngIf="miForm.get('nombre')?.errors?.['maxlength']">Máximo 30 caracteres.</small>
+      </div>
+  
+      <input formControlName="apellido" type="text" placeholder="Apellido" />
+      <div *ngIf="miForm.get('apellido')?.invalid && miForm.get('apellido')?.touched">
+        <small *ngIf="miForm.get('apellido')?.errors?.['required']">El apellido es obligatorio.</small>
+      </div>
+  
+      <input formControlName="dni" type="text" placeholder="DNI" />
+      <div *ngIf="miForm.get('dni')?.invalid && miForm.get('dni')?.touched">
+        <small *ngIf="miForm.get('dni')?.errors?.['required']">El DNI es obligatorio.</small>
+        <small *ngIf="miForm.get('dni')?.errors?.['pattern']">El DNI debe ser numérico.</small>
+        <small *ngIf="miForm.get('dni')?.errors?.['minlength'] || miForm.get('dni')?.errors?.['maxlength']">DNI debe tener entre 7 y 8 dígitos.</small>
+      </div>
+  
+      <input formControlName="telefono" type="tel" placeholder="Teléfono" />
+      <div *ngIf="miForm.get('telefono')?.invalid && miForm.get('telefono')?.touched">
+        <small *ngIf="miForm.get('telefono')?.errors?.['required']">El teléfono es obligatorio.</small>
+        <small *ngIf="miForm.get('telefono')?.errors?.['pattern']">El teléfono debe ser numérico.</small>
+        <small *ngIf="miForm.get('telefono')?.errors?.['minlength'] || miForm.get('telefono')?.errors?.['maxlength']">Teléfono debe tener entre 10 y 15 dígitos.</small>
+      </div>
+  
+      <input formControlName="contra" type="password" placeholder="Contraseña" />
+      <div *ngIf="miForm.get('contra')?.invalid && miForm.get('contra')?.touched">
+        <small *ngIf="miForm.get('contra')?.errors?.['required']">La contraseña es obligatoria.</small>
+        <small *ngIf="miForm.get('contra')?.errors?.['minlength']">Mínimo 6 caracteres.</small>
+      </div>
+  
+      <input formControlName="confirmarContrasena" type="password" placeholder="Confirmar Contraseña" />
+      <div *ngIf="miForm.errors?.['passwordsMismatch'] && miForm.get('confirmarContrasena')?.touched">
+        <small>Las contraseñas no coinciden.</small>
+      </div>
+  
+      <input formControlName="email" type="email" placeholder="E-mail" />
+      <div *ngIf="miForm.get('email')?.invalid && miForm.get('email')?.touched">
+        <small *ngIf="miForm.get('email')?.errors?.['required']">El email es obligatorio.</small>
+        <small *ngIf="miForm.get('email')?.errors?.['email']">Debe ser un email válido.</small>
+      </div>
+  
+      <input formControlName="confirmarEmail" type="email" placeholder="Confirmar E-mail" />
+      <div *ngIf="miForm.errors?.['emailsMismatch'] && miForm.get('confirmarEmail')?.touched">
+        <small>Los emails no coinciden.</small>
+      </div>
+  
+      <div class="radio-group">
+        <label>
+          <input type="radio" formControlName="tipoUsuario" value="medico" (change)="actualizarTipoUsuario('medico')" />
+          Médico
+        </label>
+        <label>
+          <input type="radio" formControlName="tipoUsuario" value="paciente" (change)="actualizarTipoUsuario('paciente')" />
+          Paciente
+        </label>
+      </div>
+  
+      <input *ngIf="miForm.get('tipoUsuario')?.value === 'medico'" formControlName="especialidad" type="text" placeholder="Especialidad" />
+      <input *ngIf="miForm.get('tipoUsuario')?.value === 'medico'" formControlName="matricula" type="text" placeholder="Matrícula" />
+      <input *ngIf="miForm.get('tipoUsuario')?.value === 'paciente'" formControlName="credencial" type="text" placeholder="Credencial" />
+  
+      <input type="submit" value="REGISTRATE" [disabled]="miForm.invalid" />
     </form>
-
-
-    
-</div>
-
+  </div>
+  

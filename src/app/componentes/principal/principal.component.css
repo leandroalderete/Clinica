@@ -79,3 +79,23 @@ footer {
     border-radius: 10px;
   }
   
+
+  .social-icons {
+    margin-top: 15px; /* Separación del contenido superior */
+    text-align: center; /* Centrar los íconos */
+}
+
+.social-icons a {
+    margin: 0 10px; /* Espaciado horizontal entre los íconos */
+    color: #fff; /* Color blanco para los íconos */
+    font-size: 24px; /* Tamaño de los íconos */
+    transition: color 0.3s ease; /* Efecto de transición suave */
+}
+
+.social-icons a:hover {
+    color: #ff9800; /* Color al hacer hover (naranja) */
+}
+
+.social-icons i {
+    display: inline-block; /* Asegura que los íconos estén alineados en línea */
+}
