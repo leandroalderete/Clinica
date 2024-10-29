@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GraficosCalificacionesComponent } from './graficos-calificaciones.component';
+import { GraficoCalificacionesComponent } from './graficos-calificaciones.component';
 
 describe('GraficosCalificacionesComponent', () => {
-  let component: GraficosCalificacionesComponent;
-  let fixture: ComponentFixture<GraficosCalificacionesComponent>;
+  let component: GraficoCalificacionesComponent;
+  let fixture: ComponentFixture<GraficoCalificacionesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GraficosCalificacionesComponent]
+      imports: [GraficoCalificacionesComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(GraficosCalificacionesComponent);
+    fixture = TestBed.createComponent(GraficoCalificacionesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
